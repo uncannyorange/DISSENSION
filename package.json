@@ -1,0 +1,24 @@
+{
+    "name": "betterdiscord",
+    "version": "1.1.1",
+    "description": "Enhances Discord by adding functionality and themes.",
+    "main": "src/index.js",
+    "scripts": {
+        "install": "cd injector && npm install && cd ../renderer && npm install",
+        "build": "npm run build-injector && npm run build-renderer",
+        "build-prod": "npm run build-prod --prefix injector && npm run build-prod --prefix renderer",
+        "build-injector": "npm run build --prefix injector",
+        "build-renderer": "npm run build --prefix renderer",
+        "pack-emotes": "node scripts/emotes.js",
+        "inject": "node scripts/inject.js",
+        "lint": "eslint --ext .js common/ && npm run lint --prefix injector && npm run lint --prefix renderer",
+        "test": "mocha --require @babel/register --recursive \"./tests/renderer/*.js\"",
+        "dist": "npm run build-prod && node scripts/pack.js"
+    },
+    "devDependencies": {
+        "asar": "^3.0.3",
+        "eslint": "^7.12.0",
+        "eslint-plugin-react": "^7.21.5",
+        "mocha": "^8.2.0"
+    }
+}

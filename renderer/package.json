@@ -1,0 +1,39 @@
+{
+    "name": "betterdiscord-renderer",
+    "description": "Renderer portion of the BetterDiscord application.",
+    "private": true,
+    "main": "src/index.js",
+    "scripts": {
+        "build": "webpack --progress --colors",
+        "watch": "webpack --progress --colors --watch",
+        "build-prod": "webpack --display errors-only --mode production --devtool none",
+        "lint-js": "eslint --ext .jsx,.js src/",
+        "build-css": "postcss src/styles/index.css -o dist/style.css",
+        "watch-css": "postcss src/styles/index.css -o dist/style.css -w",
+        "lint-css": "stylelint src/styles/*.css && stylelint src/styles/**/*.css",
+        "lint": "npm run lint-js && npm run lint-css",
+        "lint-prod": "npm run lint-js -- --quiet && npm run lint-css -- --quiet",
+        "test-prod": "npm run test -- --reporter min"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.14.3",
+        "@babel/preset-env": "^7.14.2",
+        "@babel/preset-react": "^7.13.13",
+        "@babel/register": "^7.13.16",
+        "babel-loader": "^8.2.2",
+        "babel-plugin-module-resolver": "^4.1.0",
+        "circular-dependency-plugin": "^5.2.2",
+        "css-loader": "^5.2.5",
+        "eslint": "^7.27.0",
+        "eslint-plugin-react": "^7.23.2",
+        "postcss": "^8.3.0",
+        "postcss-cli": "^8.3.1",
+        "postcss-csso": "^4.0.0",
+        "postcss-easy-import": "^3.0.0",
+        "postcss-loader": "^4.3.0",
+        "stylelint": "^13.13.1",
+        "stylelint-config-standard": "^20.0.0",
+        "webpack": "^4.46.0",
+        "webpack-cli": "^3.3.12"
+    }
+}
