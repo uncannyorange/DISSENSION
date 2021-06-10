@@ -1,10 +1,3 @@
-
-
-
-mainWindow.webContents.on('dom-ready', async () => {
-  setTimeout(() => {
-    mainWindow.webContents.executeJavaScript(
-		await fetch()
-	);
-  }, 300);
-});
+function dissensiontest(){
+	alert('doesn\'t look like anythimg to me')
+}
