@@ -1,0 +1,23 @@
+{
+  "name": "dissension",
+  "version": "0.1.0",
+  "description": "Mod within a mod. Neat, isn't it?",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uncannyorange/DISSENSION.git"
+  },
+  "author": "UncannyOrange and Superwibr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uncannyorange/DISSENSION/issues"
+  },
+  "homepage": "https://github.com/uncannyorange/DISSENSION#readme",
+  "devDependencies": {
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
+  }
+}
