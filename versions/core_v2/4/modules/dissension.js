@@ -139,15 +139,10 @@ const dissension = {
 
 	// navigator
 	openNav: function () { // open navigation
-		document.getElementById("overlayNav").style.width = "100%";
+		document.getElementById("overlayNav").style.height = "100%";
 	},
 	closeNav: function () { // close navigation
-		document.getElementById("overlayNav").style.width = "0%";
-	},
-
-	// sleep
-	sleep: (ms) => {
-		return new Promise(resolve => setTimeout(resolve, ms));
+		document.getElementById("overlayNav").style.height = "0%";
 	},
 
 	// getting user token for auth
@@ -185,19 +180,6 @@ const dissension = {
 			.catch(e => {
 				console.error("[Dissension]: Error sending message:" + e)
 			});
-	},
-
-	pluginpool: [],
-	plugins:{
-		init(){ // runs plugins from the plugin pool (diss.pluginpool)
-			for (let i = 0; i < diss.pluginpool.length; i++) {
-				const plugin = diss.pluginpool[i];
-				plugin.init()
-			}
-		},
-		add(func){
-			diss.pluginpool.push(func)
-		}
 	},
 
 	// API interaction
@@ -246,9 +228,6 @@ const dissension = {
 				});
 			};
 			return result
-		},
-		async requirecdn(filename){ // requires (GETs and runs) scripts, finding them in the CDN channels list
-
 		}
 	},
 	downloadqueue: {
