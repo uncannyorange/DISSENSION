@@ -1,4 +1,4 @@
-export const load = async function(){setTimeout(function () { // init
+const load = async function(){setTimeout(function () { // init
 	
 	// apply style
 	diss.data.applytheme()
@@ -40,7 +40,7 @@ export const load = async function(){setTimeout(function () { // init
 	import { head, overlay } from "./content";
 	document.head.insertAdjacentHTML('beforeend', head);
 	document.body.insertAdjacentHTML('afterbegin', overlay);
-	
+
 	document.getElementsByClassName('overlay-closebtn')[0].addEventListener('click', function () {
 		dissension.closeNav()
 	})
@@ -80,3 +80,5 @@ export const load = async function(){setTimeout(function () { // init
 	})
 
 }, 10)};
+
+export { load }
