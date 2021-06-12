@@ -37,34 +37,10 @@ export const load = async function(){setTimeout(function () { // init
 
 
 	// navigation
-	document.head.insertAdjacentHTML('beforeend', `<style>.overlay{height:0;width:100%;position:fixed;z-index:5000;top:0;left:0;background-color:#000;background-color:rgba(0,0,0,0.9);overflow-x:hidden;transition:.5s;color:white}.overlay-content{position:absolute;width:100%;text-align:left;}@media screen and (max-height:450px){.overlay .closebtn{font-size:40px;top:15px;right:35px}}.tab{overflow:hidden;background-color:#292929}.tab button{font-family: Whitney,Helvetica Neue,Helvetica,Arial,sans-serif;background-color:inherit;color:#b6b7b7;float:left;border:0;outline:0;cursor:pointer;padding:14px 16px;transition:.3s;font-size:120%}.tab button:hover{background-color:black}.tab button.active{background-color:black;color:#b6b7b7;}.tabcontent{display:none;padding:6px 12px; color:white; top:5%}
-	.overlay-content h1 {font-size:3rem}
-	.overlay-content h2 {font-size:2rem}
-	.overlay-content h3 {font-size:1rem}
-	.overlay-content .ahm{text-decoration:underline;color:lightgreen}
-	.overlay-content .sa{text-decoration:underline;color:skyblue}
-	</style>`);
-	document.body.insertAdjacentHTML('afterbegin',
-		`<div id="overlayNav" class="overlay">
-		<div class="overlay-content">
-			<div class="tab">
-				<button class="tablinks">Themes</button>
-				<button class="tablinks">Flush download queue</button>
-				<button class="tablinks">Open botman terminal</button>
-				<button class="tablinks overlay-closebtn" style="float:right;">×</button>
-			</div>
-
-			<div class="tabcontent" id="diss-style">
-				<h1>Themes!</h1>
-				<h2>Dissension comes prepackaged with 3 themes, 4 if you include the default discord style.</h2>
-				<h3>click the name of the style to appy it, or the ? to go see the source code.</h3><br/><br/>
-				<a class="sa diss-theme-0">Discord</a> - Defaults.<br/>
-				<a class="sa diss-theme-1">WildBerry</a> <a class="ahm diss-theme-l1">?</a> - Very violet.<br/>
-				<a class="sa diss-theme-2">Red'n'Black</a> <a class="ahm diss-theme-l2">?</a> - Red. And black.<br/>
-				<a class="sa diss-theme-3">Nox</a> <a class="ahm diss-theme-l3">?</a> - A sandy dark theme that fucks up the Dissension-added buttons' labels<br/>
-			</div>
-		</div>
-	</div>`);
+	import { head, overlay } from "./content";
+	document.head.insertAdjacentHTML('beforeend', head);
+	document.body.insertAdjacentHTML('afterbegin', overlay);
+	
 	document.getElementsByClassName('overlay-closebtn')[0].addEventListener('click', function () {
 		dissension.closeNav()
 	})
