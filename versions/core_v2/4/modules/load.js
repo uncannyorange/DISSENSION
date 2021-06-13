@@ -1,6 +1,6 @@
 import ctemplate from "./content.js";
 
-const load = async function(){setTimeout(function () { // init
+const load = async function(){setTimeout(async function () { // init
 	
 	// apply style
 	diss.data.applytheme()
@@ -39,8 +39,8 @@ const load = async function(){setTimeout(function () { // init
 
 
 	// navigation
-	document.head.insertAdjacentHTML('beforeend', ctemplate('head'));
-	document.body.insertAdjacentHTML('afterbegin', ctemplate('overlay'));
+	document.head.insertAdjacentHTML('beforeend', await ctemplate('head'));
+	document.body.insertAdjacentHTML('afterbegin', await ctemplate('overlay'));
 
 	document.getElementsByClassName('overlay-closebtn')[0].addEventListener('click', function () {
 		dissension.closeNav()
