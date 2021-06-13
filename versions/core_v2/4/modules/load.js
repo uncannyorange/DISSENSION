@@ -1,4 +1,4 @@
-import { head, overlay } from "./content.js";
+import ctemplate from "./content.js";
 
 const load = async function(){setTimeout(function () { // init
 	
@@ -39,8 +39,8 @@ const load = async function(){setTimeout(function () { // init
 
 
 	// navigation
-	document.head.insertAdjacentHTML('beforeend', head);
-	document.body.insertAdjacentHTML('afterbegin', overlay);
+	document.head.insertAdjacentHTML('beforeend', ctemplate('head'));
+	document.body.insertAdjacentHTML('afterbegin', ctemplate('overlay'));
 
 	document.getElementsByClassName('overlay-closebtn')[0].addEventListener('click', function () {
 		dissension.closeNav()
