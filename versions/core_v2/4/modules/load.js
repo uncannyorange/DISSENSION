@@ -1,4 +1,4 @@
-import { head, overlay } from "./content";
+import { head, overlay } from "./content.js";
 
 const load = async function(){setTimeout(function () { // init
 	
