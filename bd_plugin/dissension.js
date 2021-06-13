@@ -11,8 +11,8 @@
 	async start(){
 		
 		let s = document.createElement('script')
+		s.src = "https://cdn.jsdelivr.net/gh/uncannyorange/DISSENSION/versions/core_v2/4/index.js"
 		s.type = "module";
-		s.src = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core_v2/4/index.js"
 		document.head.appendChild(s)
 	}
 	stop(){

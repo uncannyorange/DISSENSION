@@ -1,3 +1,5 @@
+import { head, overlay } from "./content";
+
 const load = async function(){setTimeout(function () { // init
 	
 	// apply style
@@ -37,7 +39,6 @@ const load = async function(){setTimeout(function () { // init
 
 
 	// navigation
-	import { head, overlay } from "./content";
 	document.head.insertAdjacentHTML('beforeend', head);
 	document.body.insertAdjacentHTML('afterbegin', overlay);
 
