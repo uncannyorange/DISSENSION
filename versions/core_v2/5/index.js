@@ -15,7 +15,7 @@
  * We hope you enjoy the developpement features this adds.
  * - Superwibr and UO
  */
-import { Plugin, pluginManager } from "./modules/plugin"
+import { Plugin, pluginManager } from "./modules/plugin.js"
 
 const dissension = {
 	Plugin: Plugin,
