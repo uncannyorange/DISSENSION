@@ -14,6 +14,7 @@
 		s.src = "https://uncannyorange.github.io/DISSENSION/versions/core_v2/5/index.js"
 		s.type = "module";
 		document.head.appendChild(s)
+		BdApi.showToast("test", {type:"info"})
 	}
 	stop(){
 		document.getElementById('dissension').remove()
