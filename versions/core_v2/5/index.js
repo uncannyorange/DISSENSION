@@ -21,3 +21,4 @@ const dissension = {
 	Plugin: Plugin,
 	pluginManager: pluginManager
 }
+window.diss = window.dissension = dissension;

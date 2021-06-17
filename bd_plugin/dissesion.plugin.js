@@ -16,6 +16,6 @@
 		document.head.appendChild(s)
 	}
 	stop(){
-		document.head.getElementById('dissension').remove()
+		document.getElementById('dissension').remove()
 	}
 }
