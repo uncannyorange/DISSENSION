@@ -2,7 +2,7 @@
  * @name DISSENSION
  * @description Here is DISSENSION that has been turned into a BetterDiscord plugin.
  * @author UncannyOrange
- * @version 0.1.1
+ * @version 4.0.0
  * 
  * @source https://github.com/uncannyorange/DISSENSION
  */
