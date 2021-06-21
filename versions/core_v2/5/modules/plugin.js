@@ -1,32 +1,14 @@
-class Plugin {
-	constructor(name, type, params) {
-		this.name = name;
-		this.type = type;
-		this.params = params;
-
-		switch (type) {
-			case "":
-				{
-
-				}
-				break;
-
-			case "plugin": default: {
-				
-				};break;
-		}
-	}
-	load(){
-		diss._pluginIndex[this.name] = this
-		diss.load
-	}
-	unload(){
-		delete diss._pluginIndex[this.name]
-	}
+const Plugin = function(name, events){
+	diss.pluginManager.register(name, events)
+	this.events = diss._events
 }
 
 const pluginManager = {
-	unloadAll(){
+	register(name){
+		if(!BdApi.Plugins.isEnabled(name)) throw "[DISSENSION] Cannot register; The addon is not enabled."
+
+	},
+	unregisterAll(){
 		for (let i = 0; i < diss._pluginIndex.length; i++) {
 			const plugin = diss._pluginIndex[i];
 			plugin.unload()

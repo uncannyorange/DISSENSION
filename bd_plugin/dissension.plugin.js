@@ -17,8 +17,7 @@
 		BdApi.showToast("test", {type:"info"})
 	}
 	stop(){
-		window.diss.pluginManager.unloadAll()
-		window.dissesnion = window.diss = undefined;
 		document.getElementById('dissension').remove()
+		window.diss.pluginManager.unregisterAll()
 	}
 }

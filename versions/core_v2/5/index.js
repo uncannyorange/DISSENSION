@@ -16,10 +16,16 @@
  * - Superwibr and UO
  */
 import { Plugin, pluginManager } from "./modules/plugin.js"
+import { events } from "./modules/events.js"
+import { util } from "./modules/util.js";
+import { _loader } from "./modules/_loader.js"
 
 const dissension = {
+	util: util,
+	_load: _loader,
 	Plugin: Plugin,
 	pluginManager: pluginManager,
 	_pluginIndex: {}
 }
 window.diss = window.dissension = dissension;
+diss._load()
