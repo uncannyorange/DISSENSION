@@ -1,8 +1,8 @@
 /**
  * @name DISSENSION
- * @description Here is DISSENSION that has been turned into a BetterDiscord plugin.
+ * @description An extra layer to BetterDiscord's plugins
  * @author UncannyOrange
- * @version 5.0.1 indev
+ * @version 5.0.2 indev
  * 
  * @source https://github.com/uncannyorange/DISSENSION
  */
@@ -17,7 +17,7 @@
 		BdApi.showToast("test", {type:"info"})
 	}
 	stop(){
-		window.diss.unloadPlugins()
+		window.diss.pluginManager.unloadAll()
 		window.dissesnion = window.diss = undefined;
 		document.getElementById('dissension').remove()
 	}

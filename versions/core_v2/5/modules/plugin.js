@@ -3,6 +3,18 @@ class Plugin {
 		this.name = name;
 		this.type = type;
 		this.params = params;
+
+		switch (type) {
+			case "":
+				{
+
+				}
+				break;
+
+			case "plugin": default: {
+				
+				};break;
+		}
 	}
 	load(){
 		diss._pluginIndex[this.name] = this
