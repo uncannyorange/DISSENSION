@@ -19,6 +19,7 @@ import { Plugin, pluginManager } from "./modules/plugin.js"
 
 const dissension = {
 	Plugin: Plugin,
-	pluginManager: pluginManager
+	pluginManager: pluginManager,
+	_pluginIndex: {}
 }
 window.diss = window.dissension = dissension;

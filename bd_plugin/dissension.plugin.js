@@ -2,7 +2,7 @@
  * @name DISSENSION
  * @description Here is DISSENSION that has been turned into a BetterDiscord plugin.
  * @author UncannyOrange
- * @version 5.0
+ * @version 5.0.1 indev
  * 
  * @source https://github.com/uncannyorange/DISSENSION
  */
@@ -17,6 +17,8 @@
 		BdApi.showToast("test", {type:"info"})
 	}
 	stop(){
+		window.diss.unloadPlugins()
+		window.dissesnion = window.diss = undefined;
 		document.getElementById('dissension').remove()
 	}
 }
