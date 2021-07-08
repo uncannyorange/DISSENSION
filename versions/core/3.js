@@ -161,7 +161,7 @@ const dissension = {
 		return window.tkn
 	},
 
-	// send message (REPLACED => api.request({method:'POST', url:'/channels/{channel.id}/messages', body:{"content":"message here"}))
+	// send message ( REPLACED => api.request({method:'POST', url:'/channels/{channel.id}/messages', body:{"content":"message here"}) )
 	sendmsg: function (message, embed, channelId) {
 		if (!channelId) {
 			channelId = document.location.pathname.split('/').pop();

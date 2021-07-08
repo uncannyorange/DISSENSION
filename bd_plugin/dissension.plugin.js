@@ -6,7 +6,7 @@
  * 
  * @source https://github.com/uncannyorange/DISSENSION
  */
-
+ 
  module.exports = class {
 	async start(){
 		let s = document.createElement('script')
@@ -14,10 +14,9 @@
 		s.src = "https://uncannyorange.github.io/DISSENSION/versions/core_v2/5/index.js"
 		s.type = "module";
 		document.head.appendChild(s)
-		BdApi.showToast("test", {type:"info"})
 	}
 	stop(){
-		document.getElementById('dissension').remove()
-		window.diss.pluginManager.unregisterAll()
+		BdApi.Plugins.enable('DISSENSION')
+		
 	}
 }
