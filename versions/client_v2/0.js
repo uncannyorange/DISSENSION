@@ -11,30 +11,16 @@
 		document.querySelector('title').innerText = "DISS | Discord";
 
 		/* creating CSPdodge */
-		window.CSPDodge = function(){
-			if(!new.target) throw TypeError("Artificial constructor cspdodge cannot be invoked without \'new\'");
-
-			/* dodger window */
-			this._window = window.open('https://uncannyorange.github.io/cspdodge.html', '_blank', 'width=1,height=1');
-			setTimeout(window.focus, 1000);
-
-			this.request = async function(url){
-				return new Promise(res => {
-					window.addEventListener('message', e => {
-						res(e.data);
-					});
-
-					this._window.postMessage(url, '*');
+		window.CSPDodge = function () {
+			return new Promise(res => {
+				const win = window.open('https://uncannyorange.github.io/cspdodge.html', '_blank', 'width=1,height=1');
+				win.blur();
+				window.addEventListener('message', e => {
+					res(e.data);
 				});
-			};
 
-			this.close = function(){
-				this._window.close()
-				for(const entry of Object.keys(this)){
-					delete this[entry];
-				};
-				this.closed = true
-			};
+				win.postMessage(url, '*');
+			});
 		};
 	};
 
