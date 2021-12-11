@@ -11,12 +11,13 @@
 		document.querySelector('title').innerText = "DISS | Discord";
 
 		/* creating CSPdodge */
-		window.CSPDodge = function () {
+		window.CSPDodge = function (url) {
 			return new Promise(res => {
 				const win = window.open('https://uncannyorange.github.io/cspdodge.html', '_blank', 'width=1,height=1');
 				win.blur();
 				window.addEventListener('message', e => {
 					res(e.data);
+					win.close();
 				});
 
 				win.postMessage(url, '*');
