@@ -6,6 +6,8 @@
  */
 
 (async dissension => {
+	const rawurl = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/"
+
 	const setup = function () {
 		/* :> */
 		document.querySelector('title').innerText = "DISS | Discord";
@@ -26,7 +28,10 @@
 		};
 
 		/* getting core */
-		const sv = await CSPDodge('');
+		const sv = await CSPDodge(rawurl+'versions/core_v3/stable.txt', 'DISS23-STABLEVER'),
+			core = await CSPDodge(`${rawurl}versions/core_v3/${sv}.js`);
+		
+		eval(core); /* eval's yucky but eh, it's necessary */
 	};
 
 	/* check for location */
