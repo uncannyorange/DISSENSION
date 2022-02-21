@@ -1,5 +1,5 @@
 <script>
-	alert("does this even work?")
+	// if you see this, [go here please](https://uncannyorange.github.io/DISSENSION/versions/client_v2/)
 </script>
 
 # DISS Client V2 / DISSENSION V3
