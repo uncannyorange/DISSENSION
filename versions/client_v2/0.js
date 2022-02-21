@@ -18,13 +18,13 @@
 				const win = window.open('https://uncannyorange.github.io/cspdodge.html', '_blank', 'width=1,height=1');
 				win.blur();
 				window.addEventListener('message', function handler(e){
-					if (e.data.status == 'ready') { // wait for ready
+					if (e.data.status == 'ready') { /* wait for ready */
 						win.postMessage({ name, url }, '*');
 						return;
 					};
 					console.log(e.data);
-					e.currentTarget.removeEventListener(e.type, handler); // remove event listner to avoid duplicates
-					res(e.data.resource); // resolve with resource
+					e.currentTarget.removeEventListener(e.type, handler); /* remove event listner to avoid duplicates */
+					res(e.data.resource); /* resolve with resource */
 					win.close();
 				});
 			});
