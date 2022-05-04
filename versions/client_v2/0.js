@@ -32,7 +32,7 @@
 
 		/* getting core */
 		const sv = await CSPDodge(rawurl + 'versions/core_v3/stable.txt', 'DISS23-STABLEVER'),
-			core = await CSPDodge(`${rawurl}versions/core_v3/${sv}.js`);
+			core = await CSPDodge(`${rawurl}versions/core_v3/${sv}.js`, 'DISS23-CORESCRIPT');
 
 		eval(core); /* eval's yucky but eh, it's necessary */
 	};
