@@ -10,15 +10,11 @@ diss.utils = {
     log: message => console.log(`%c[DISSENSION] %c${message}`, `color:crimson;font-weight:bold`, ""),
     Webpack() {
         if (this.cachedWebpack) return this.cachedWebpack;
-
         let webpackExports;
-
         if (window.webpackChunkdiscord_app != null) {
             const Ids = ['__extra_Id__'];
             window.webpackChunkdiscord_app.push([
-                Ids,
-                {},
-                (req) => {
+                Ids, {}, (req) => {
                     webpackExports = req;
                     Ids.length = 0;
                 }
@@ -28,13 +24,9 @@ diss.utils = {
 
         const cachedExports = new Set(),
             moduleCache = new Set(),
-
             addModuleToCache = (module) => {
                 if (typeof module !== 'object' && typeof module !== 'function') return;
-
-                if (module.__esModule && module.default)
-                    module = module.default;
-
+                if (module.__esModule && module.default) module = module.default;
                 moduleCache.add(module);
             },
             addModulesToCache = (modules) => {
@@ -194,13 +186,13 @@ diss.modules = new Object();
             if (!styles.includes(style)) return;
             area.classList.add(style);
         },
-        getInput(dialog){
-            if(!diss.utils._cmdmode) throw new TypeError("[DISS] Not in command mode!");
-            if(m.cmd.getInput._callback) throw new TypeError("[DISS] An input is already active; cannot have more than one input request at a time!");
+        getInput(dialog) {
+            if (!diss.utils._cmdmode) throw new TypeError("[DISS] Not in command mode!");
+            if (m.cmd.getInput._callback) throw new TypeError("[DISS] An input is already active; cannot have more than one input request at a time!");
             return new Promise(res => {
                 m.cmd.setInputStyle("cmdinput");
                 document.querySelector("[class*=placeholder-]").setAttribute("diss-dialog", dialog);
-                m.cmd.getInput._callback = function(msg){
+                m.cmd.getInput._callback = function (msg) {
                     delete m.cmd.getInput._callback;
                     m.cmd.setInputStyle("cmdmode");
                     res(msg);
@@ -210,14 +202,47 @@ diss.modules = new Object();
 
         // registry and execution
         _r: {},
-        add(name, dat, defaultHandler) {
-            this._r[name] = { default: defaultHandler, dat };
+        add(name, dat, handler) {
+            this._r[name] = { handler, dat };
         },
         addSub(parentName, name, dat, handler) {
             this._r[parentName][name] = { dat, handler };
         },
-        exec(cmstr) {
-            
+        async exec(cmdstr) {
+            if (!diss.utils._cmdmode) throw new TypeError("[DISS] Not in command mode!");
+            let shift = 1
+
+            const parts = cmdstr.split(" "),
+                cmd = this._r[parts[0]];
+            if (!cmd) return;
+
+            const sub = cmd[parts[1]];
+            if (sub) shift += 1;
+
+            // format and grab according to DAT array
+            let out = [];
+            for (const [i, dat] of (sub ? sub : cmd).dat.entries()) {
+                let item = parts[i + shift];
+                switch (dat) {
+                    case "string":
+                        out.push(String(item ? item : ""))
+                        break;
+
+                    case "number":
+                        out.push(Number(item ? item : 0))
+                        break;
+
+                    case (dat[0] == "input"):
+                        out.push(await m.cmd.getInput(dat[1]))
+                        break;
+
+                    default:
+                        break;
+                };
+            };
+
+            // handling
+            (sub ? sub : cmd).handler.apply(undefined, out)
         }
     }
 
@@ -227,15 +252,48 @@ diss.utils.log("Added custom modules (diss.modules)");
 // DISSENSION command mode handlers
 diss.utils._cmdmode = false;
 (function (cmd) {
-    // actions
+    //==============================//
+    // registering default commands //
+    //==============================//
 
-    // registering default commands
-    // cmd.add()
+    //
+    // help
+    //
+    cmd.add("help", ["string"], cmdname => {
+        console.log(cmdname)
+        if (!cmdname) diss.utils.imsg("", [{
+            "type": "rich",
+            "title": "Command Mode Help",
+            "description": "Command mode is the main way to interact with DISSENSION. Here are a few commands to get you started",
+            "color": 16290583,
+            "fields": [
+                {
+                    "name": "draft",
+                    "value": "The `draft` command allows you to save plaintext to your browser's local storage to send or manipulate.",
+                    "inline": true
+                },
+                {
+                    "name": "emote (save | copy)",
+                    "value": "The `emote` command allows you to save image links and send them as custom reaction emojis. \nFor saving: `emote save <name> <url>`\nFor copying: `emote copy <name>`",
+                    "inline": true
+                }
+            ]
+        }])
+    });
 
+    //
+    // draft
+    //
+    cmd.add("draft", [["input", "Write draft"]], drafttext => {
+        
+    })
+
+    //
     // patch sendMessage
+    //
     diss.utils.patch(diss.discordModules.MessageActions, "sendMessage", (...args) => {
         const [messageId, message, x1, x2] = args;
-        console.log(message)
+        // console.log(message)
 
         // toggle cmdmode
         if (message.content == "$cmd") {
@@ -246,7 +304,7 @@ diss.utils._cmdmode = false;
 
         // getting input
         const cb = diss.modules.cmd.getInput._callback
-        if(cb) cb(message.content);
+        if (cb) cb(message.content);
 
         // block if cmdmode, passthrough if not
         return (!diss.utils._cmdmode && message.content != "$cmd")

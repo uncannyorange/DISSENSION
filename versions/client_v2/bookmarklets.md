@@ -1,1 +1,0 @@
-## Bookmarklet minified V2 clients
