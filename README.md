@@ -1,10 +1,7 @@
 # DISSENSION
-[Classic]()<br>
-Here is DISSENSION that has been turned into a [BetterDiscord](https://betterdiscord.app) plugin.<br>
-Note that DISSENSION is meant to be a mod on it's own, so deactivating it will only disable BD-dependant content.
-
 ## versions
-You will find the "classic" versions under [`version/core`](./versions/core) and the newer versions under [`versions/core_v2`](./versions/core_v2). The core v2 versions must be used with the BD plugin. The plugin will auto-load the latest version on the spot.
+Clients are in [`versions/client_v2`](./versions/client_v2). You can snoop around in the core code in [`versions/core_v3`](./versions/core_v3)
+<br/>
 
-## FRESH START!
-The latest versions will now been made into a bookmarklet. New bookmarklet clients in [`versions/client_v2`](./versions/client_v2). You can snoop around in the core code in [`versions/core_v3`](./versions/core_v3)
+## classic versions
+You will find the "classic" versions under [`version/core`](./versions/core) and the versions used by the old BD plugin under [`versions/core_v2`](./versions/core_v2). The BD versions are pretty much garbage and the older versions somehow still mildly work, but they're all deprecated.

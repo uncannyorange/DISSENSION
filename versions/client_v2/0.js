@@ -22,6 +22,7 @@
 						win.postMessage({ name, url }, '*');
 						return;
 					};
+					if(e.data.name !== name)
 					console.log(e.data);
 					e.currentTarget.removeEventListener(e.type, handler); /* remove event listner to avoid duplicates */
 					res(e.data.resource); /* resolve with resource */
