@@ -13,25 +13,24 @@ diss.CSPDodge = function (url, name = 'DISS23DEFAULTCOMMS') {
         win.blur();
         window.addEventListener('message', function handler(e) {
             if (e.data.status == 'ready') return win.postMessage({ name, url }, '*');
-            if (e.data.name !== name);
+            if (e.data.name !== name) return;
             e.currentTarget.removeEventListener(e.type, handler); // remove event listner to avoid duplicates
             res(e.data.resource); // resolve with resource
             win.close();
         });
     });
 };
-diss.CSPDodge.eval = async function (...srcs) {
-    for (const src of srcs) {
-        (0, eval)(await diss.CSPDodge(src));
-    };
+diss.CSPDodge.eval = async function (src, name) {
+    (0, eval)(await diss.CSPDodge(src, name));
 };
-diss.CSPDodge.style = async function (...styles) {
-    for (const style of styles){
-        document.head.insertAdjacentHTML('beforeend', `<style>${await diss.CSPDodge(style)}</style>`);
-    };
-}
+
 
 // Fetching and Caching
-const rooturl = "https://https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core_v3/0/";
-diss.CSPDodge.eval([`${rooturl}utils.js`, `${rooturl}bootstrap.js`, `${rooturl}modules.js`, `${rooturl}cmd.js`]);
-diss.CSPDodge.style([`${rooturl}styles.css`]);
+(async function () {
+    const rooturl = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core_v3/0/";
+    await diss.CSPDodge.eval(`${rooturl}utils.js`, "DISS23UTILS");
+    await diss.CSPDodge.eval(`${rooturl}bootstrap.js`, "DISS23BOOTSTRAP");
+    await diss.CSPDodge.eval(`${rooturl}modules.js`, "DISS23MODULES");
+    await diss.CSPDodge.eval(`${rooturl}cmd.js`, "DISS23CMD");
+    document.head.insertAdjacentHTML('beforeend', `<style>${await diss.CSPDodge(`${rooturl}styles.css`, "DISS23STYLES")}</style>`);
+})()
