@@ -27,10 +27,15 @@ diss.CSPDodge.eval = async function (src, name) {
 
 // Fetching and Caching
 (async function () {
-    const rooturl = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core_v3/0/";
-    await diss.CSPDodge.eval(`${rooturl}utils.js`, "DISS23UTILS");
-    await diss.CSPDodge.eval(`${rooturl}bootstrap.js`, "DISS23BOOTSTRAP");
-    await diss.CSPDodge.eval(`${rooturl}modules.js`, "DISS23MODULES");
-    await diss.CSPDodge.eval(`${rooturl}cmd.js`, "DISS23CMD");
-    document.head.insertAdjacentHTML('beforeend', `<style>${await diss.CSPDodge(`${rooturl}styles.css`, "DISS23STYLES")}</style>`);
+
+    const rooturl = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core_v3/",
+        coreurl = `${rooturl}0/`,
+        vernum = await CSPDodge(`${rooturl}stable.txt`);
+
+    
+    await diss.CSPDodge.eval(`${coreurl}utils.js`, "DISS23UTILS");
+    await diss.CSPDodge.eval(`${coreurl}bootstrap.js`, "DISS23BOOTSTRAP");
+    await diss.CSPDodge.eval(`${coreurl}modules.js`, "DISS23MODULES");
+    await diss.CSPDodge.eval(`${coreurl}cmd.js`, "DISS23CMD");
+    document.head.insertAdjacentHTML('beforeend', `<style>${await diss.CSPDodge(`${coreurl}styles.css`, "DISS23STYLES")}</style>`);
 })()
