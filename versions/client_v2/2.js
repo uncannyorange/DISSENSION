@@ -10,7 +10,7 @@
 
     const setup = async function () {
         // creating CSPdodge
-        diss.CSPDodge = function (url, name = 'DISS23DEFAULTCOMMS') {
+        const CSPDodge = function (url, name = 'DISS23DEFAULTCOMMS') {
             return new Promise(res => {
                 const win = window.open('https://uncannyorange.github.io/cspdodge.html', '_blank', 'width=1,height=1');
                 win.blur();
@@ -25,8 +25,8 @@
         };
 
         // getting core
-        const sv = (await diss.CSPDodge(`${rawurl}versions/core_v3/stable.txt`, 'DISS23-STABLEVER')).split(":")[0];
-        eval(await diss.CSPDodge(`${rawurl}versions/core_v3/${sv}/${sv}.js`, 'DISS23-CORESCRIPT'));
+        const sv = (await CSPDodge(`${rawurl}versions/core_v3/stable.txt`, 'DISS23-STABLEVER')).split(":")[0];
+        eval(await CSPDodge(`${rawurl}versions/core_v3/${sv}/${sv}.js`, 'DISS23-CORESCRIPT'));
     };
 
     // check for location
