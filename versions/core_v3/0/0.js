@@ -22,7 +22,7 @@ diss.CSPDodge = function (url, name = 'DISS23DEFAULTCOMMS') {
 };
 diss.CSPDodge.eval = async function (...srcs) {
     for (const src of srcs) {
-        (0, eval)(await diss.CSPDodge("src"));
+        (0, eval)(await diss.CSPDodge(src));
     };
 };
 diss.CSPDodge.style = async function (...styles) {
