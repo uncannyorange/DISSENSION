@@ -33,5 +33,5 @@ diss.CSPDodge.style = async function (...styles) {
 
 // Fetching and Caching
 const rooturl = "https://https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core/core_v3/0/";
-diss.CSPDodge.eval([`${rooturl}utils.js`, `${rooturl}bootstrap.js`, `${rooturl}modules.js`, `${rooturl}.js`]);
+diss.CSPDodge.eval([`${rooturl}utils.js`, `${rooturl}bootstrap.js`, `${rooturl}modules.js`, `${rooturl}cmd.js`]);
 diss.CSPDodge.style([`${rooturl}styles.css`]);
