@@ -26,7 +26,7 @@
 
         // getting core
         const sv = (await CSPDodge(`${rawurl}versions/core_v3/stable.txt`, 'DISS23-STABLEVER')).split(":")[0];
-        eval(await CSPDodge(`${rawurl}versions/core_v3/${sv}/${sv}.js`, 'DISS23-CORESCRIPT'));
+        (0, eval)(await CSPDodge(`${rawurl}versions/core_v3/${sv}/${sv}.js`, 'DISS23-CORESCRIPT'));
     };
 
     // check for location
