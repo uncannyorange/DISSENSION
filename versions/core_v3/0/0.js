@@ -38,4 +38,4 @@ diss.CSPDodge.eval = async function (src, name) {
     await diss.CSPDodge.eval(`${coreurl}modules.js`, "DISS23MODULES");
     await diss.CSPDodge.eval(`${coreurl}cmd.js`, "DISS23CMD");
     document.head.insertAdjacentHTML('beforeend', `<style>${await diss.CSPDodge(`${coreurl}styles.css`, "DISS23STYLES")}</style>`);
-})()
+})();

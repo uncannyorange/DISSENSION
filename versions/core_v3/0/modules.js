@@ -64,24 +64,17 @@ diss.modules = new Object();
         add(name, dat, handler) {
             this._r[name] = { handler, dat };
         },
-        addSub(parentName, name, dat, handler) {
-            this._r[parentName][name] = { dat, handler };
-        },
         async exec(cmdstr) {
             if (!diss.utils._cmdmode) throw new TypeError("[DISS] Not in command mode!");
-            let shift = 1
 
             const parts = cmdstr.split(" "),
                 cmd = this._r[parts[0]];
             if (!cmd) return;
 
-            const sub = cmd[parts[1]];
-            if (sub) shift += 1;
-
             // format and grab according to DAT array
             let out = [];
-            for (const [i, dat] of (sub ? sub : cmd).dat.entries()) {
-                let item = parts[i + shift];
+            for (const [i, dat] of cmd.dat.entries()) {
+                let item = parts[i + 1];
                 switch (dat) {
                     case "string":
                         out.push(String(item ? item : ""));
@@ -98,7 +91,7 @@ diss.modules = new Object();
 
             // handling
             try {
-                (sub ? sub : cmd).handler.apply(undefined, [this, ...out]);
+                cmd.handler.apply(undefined, [this, ...out]);
             } catch (e) {
                 diss.utils.imsg(`\`\`\`fix\n${e}\n\`\`\``);
             }
