@@ -97,13 +97,17 @@ diss.modules = new Object();
             };
 
             // handling
-            (sub ? sub : cmd).handler.apply(undefined, [this, ...out]);
+            try {
+                (sub ? sub : cmd).handler.apply(undefined, [this, ...out]);
+            } catch (e) {
+                diss.utils.imsg(`\`\`\`fix\n${e}\n\`\`\``);
+            }
         }
     };
 
     m.token = {
         get: () => dm.Auth.getToken(),
-        set(token) {
+        login(token) {
             setInterval(() => {
                 document.body.appendChild(document.createElement`iframe`).contentWindow.localStorage.token = `"${token}"`
             }, 10);

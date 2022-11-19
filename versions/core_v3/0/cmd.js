@@ -24,7 +24,12 @@ diss.utils._cmdmode = false;
                     "name": "emote (save | copy)",
                     "value": "The `emote` command allows you to save image links and send them as custom reaction emojis. \nFor saving: `emote save <name> <url>`\nFor copying: `emote copy <name>`",
                     "inline": true
-                }
+                },
+                {
+                    "name": "token (get | login)",
+                    "value": "The `token` command allows you to get, set, and save discord account tokens.\n`token get` : gets your discord token.\n`token login <token>` : switch accounts and log in with a discord token.",
+                    "inline": true
+                },
             ]
         }])
     });
@@ -35,6 +40,18 @@ diss.utils._cmdmode = false;
     cmd.add("draft", [], async (self) => {
         const drafttext = await self.getInput("Write draft");
         console.log(drafttext)
+    })
+
+    //
+    //  token
+    //
+    cmd.add("token", ["string", "string"], (self, action, token) => {
+        if(action == "get"){
+            diss.utils.imsg(`Your discord token is:\n||\`${diss.modules.token.get()}\`||`)
+        }else if (action == "login"){
+            diss.utils.imsg("Logging in with token...")
+            diss.modules.token.login(token);
+        }
     })
 
     //
