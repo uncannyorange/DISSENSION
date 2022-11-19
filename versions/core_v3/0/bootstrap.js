@@ -21,12 +21,13 @@ diss.discordModules = new Object();
     dm.CloudUploadPrototype = fm(x => x.prototype?.uploadFileToCloud && x.prototype.upload)?.prototype;
     dm.CloudUploadHelper = fup(['getUploadPayload']);
 
-    // drafts
+    // messages
     dm.DraftStore = fup(["getDraft"]);
     dm.DraftActions = fup(["changeDraft", "saveDraft"]);
+    dm.MessageActions = fup(["receiveMessage", "sendBotMessage"]);
 
-    // system
-    dm.MessageActions = fup(["receiveMessage", "sendBotMessage"])
+    // auth
+    dm.Auth = fup(["getId", "getToken"]);
 
 })(diss.discordModules, diss.utils.cachedWebpack.findModuleByUniqueProperties, diss.utils.cachedWebpack.findModule);
 diss.utils.log("Bootstrapped discord modules (diss.discordmodules)");
