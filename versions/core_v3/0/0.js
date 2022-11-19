@@ -30,7 +30,7 @@ diss.CSPDodge.eval = async function (src, name) {
 
     const rooturl = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core_v3/",
         coreurl = `${rooturl}0/`,
-        vernum = await CSPDodge(`${rooturl}stable.txt`);
+        vernum = await diss.CSPDodge(`${rooturl}stable.txt`);
 
     
     await diss.CSPDodge.eval(`${coreurl}utils.js`, "DISS23UTILS");
