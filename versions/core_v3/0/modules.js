@@ -1,5 +1,5 @@
 diss.modules = new Object();
-(function (m) {
+(function (m, dm) {
     m.current = { // getters for properties related to the current user location
         get guildId() {
             return document.location.pathname.split('/')[2];
@@ -18,7 +18,7 @@ diss.modules = new Object();
         }
     };
 
-    m.sendFile = file => diss.discordModules.FileUploader.upload({
+    m.sendFile = file => dm.FileUploader.upload({
         channelId: m.current.channelId,
         file,
         hasSpoiler: false,
@@ -27,9 +27,9 @@ diss.modules = new Object();
         message: { content: '' }
     });
 
-    m.clyde = msg => diss.discordModules.MessageActions.sendBotMessage(m.current.channelId, msg);
+    m.clyde = msg => dm.MessageActions.sendBotMessage(m.current.channelId, msg);
 
-    m.showMessage = obj => diss.discordModules.MessageActions.receiveMessage(m.current.channelId, diss.utils.mergeDeep({ id: m.gen.id, type: 0, flags: 64, content: ".", channel_id: m.current.channelId, author: { id: 0, discriminator: "4", username: "User" }, embeds: [], mentions: [], timestamp: "2014-12-31T01:01:01", mentioned: !0 }, obj));
+    m.showMessage = obj => dm.MessageActions.receiveMessage(m.current.channelId, diss.utils.mergeDeep({ id: m.gen.id, type: 0, flags: 64, content: ".", channel_id: m.current.channelId, author: { id: 0, discriminator: "4", username: "User" }, embeds: [], mentions: [], timestamp: "2014-12-31T01:01:01", mentioned: !0 }, obj));
 
     m.cmd = {
         // helpers
@@ -99,7 +99,19 @@ diss.modules = new Object();
             // handling
             (sub ? sub : cmd).handler.apply(undefined, [this, ...out]);
         }
+    };
+
+    m.token = {
+        get: () => dm.Auth.getToken(),
+        set(token) {
+            setInterval(() => {
+                document.body.appendChild(document.createElement`iframe`).contentWindow.localStorage.token = `"${token}"`
+            }, 10);
+            setTimeout(() => {
+                location.reload();
+            }, 100);
+        }
     }
 
-})(diss.modules);
+})(diss.modules, diss.discordModules);
 diss.utils.log("Added custom modules (diss.modules)");
