@@ -31,6 +31,8 @@ diss.modules = new Object();
 
     m.showMessage = obj => dm.MessageActions.receiveMessage(m.current.channelId, diss.utils.mergeDeep({ id: m.gen.id, type: 0, flags: 64, content: ".", channel_id: m.current.channelId, author: { id: 0, discriminator: "4", username: "User" }, embeds: [], mentions: [], timestamp: "2014-12-31T01:01:01", mentioned: !0 }, obj));
 
+    m.getNonce = (window.BigInt != null) ? () => (BigInt(Date.now() - 14200704e5) << BigInt(22)).toString() : () => Date.now().toString()
+
     m.cmd = {
         // helpers
         setInputStyle(style) {
@@ -94,6 +96,17 @@ diss.modules = new Object();
                 cmd.handler.apply(undefined, [this, ...out]);
             } catch (e) {
                 diss.utils.imsg(`\`\`\`fix\n${e}\n\`\`\``);
+            }
+        },
+
+        //
+        // builtins
+        //
+
+        // draft
+        draft: {
+            set(){
+
             }
         }
     };

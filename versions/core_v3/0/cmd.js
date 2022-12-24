@@ -37,7 +37,7 @@ diss.utils._cmdmode = false;
     //
     // draft
     //
-    cmd.add("draft", [], async (self) => {
+    cmd.add("draft", ["string"], async (self, action) => {
         const drafttext = await self.getInput("Write draft");
         console.log(drafttext)
     })
