@@ -20,6 +20,7 @@
             dfetch.win.postMessage({ name, url }, '*');
         });
         dfetch.init = () => new Promise(res => {
+            if (dfetch.ready) return;
             dfetch.win = window.open('https://uncannyorange.github.io/DISSENSION/dfetch.html', '_blank', 'width=1,height=1');
             dfetch.win.blur();
             window.addEventListener('message', function readying(e) {

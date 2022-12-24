@@ -1,11 +1,11 @@
 /**
  * @name DISSENSION
  * @by UncannyOrange and Superwibr
- * @version 3.0.0 core
+ * @version 3.0.1 core
  */
 
 if (typeof diss == "undefined") window.diss = new Object();
-if (typeof dfetch == "undefined") throw new TypeError("dfetch not found, cannot load dissension")
+if (typeof dfetch == "undefined") throw new TypeError("dfetch not found, cannot load dissension");
 
 // Fetching and Caching
 (async function () {
