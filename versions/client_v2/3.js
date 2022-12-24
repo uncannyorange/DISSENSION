@@ -6,12 +6,12 @@
  */
 
 (async dissension => {
-    const rawurl = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/";
+    const rawurl = 'https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/';
 
     const setup = async function () {
         // creating dfetch
-        const dfetch = (url, name = "DEFAULT") => new Promise(res => {
-            if (!dfetch.ready) throw new Error("dfetch window not ready or not initialised");
+        const dfetch = (url, name = 'DEFAULT') => new Promise(res => {
+            if (!dfetch.ready) throw new Error('dfetch window not ready or not initialised');
             window.addEventListener('message', function handler(e) {
                 if (e.data.name !== name) return;
                 e.currentTarget.removeEventListener(e.type, handler);
@@ -47,5 +47,5 @@
     // check for location
     location.href.startsWith('https://discord.com/channels/')
         ? setup()
-        : (location = "https://discord.com/channels/@me");
+        : (location = 'https://discord.com/channels/@me');
 })();
