@@ -1,0 +1,33 @@
+/* cmdmode */
+.cmdmode {
+    border: 2px solid var(--info-warning-foreground);
+    background-color: var(--background-mentioned);
+}
+
+.cmdmode [class*=placeholder-]::after {
+    content: "Enter command";
+    visibility: visible;
+    font-size: initial;
+}
+
+/* cmdmode's dynamic input */
+.cmdinput {
+    border: 2px solid #25f4bf;
+    background-color: #3d4946;
+}
+
+.cmdinput [class*=placeholder-]::after {
+    content: attr(diss-dialog);
+    visibility: visible;
+    font-size: initial;
+}
+
+/* for all */
+:is(.cmdmode, .cmdinput) [class*=placeholder-] {
+    visibility: hidden;
+    font-size: 0;
+}
+
+:is(.cmdmode, .cmdinput) [class*=buttons-]>:nth-child(-n+3) {
+    display: none;
+}
