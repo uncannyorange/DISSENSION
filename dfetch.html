@@ -1,0 +1,11 @@
+<script>
+    window.addEventListener('message', async e => {
+        if (e.data == undefined || e.data.url == undefined) return;
+        const response = await fetch(e.data.url);
+        const { status, statusText } = response;
+        const blob = await response.blob();
+        console.log(e.data, blob);
+        window.opener.postMessage({ blob, resinit: { status, statusText }, name: e.data.name }, '*');
+    });
+    window.opener.postMessage({ status: "ready" }, '*');
+</script>
