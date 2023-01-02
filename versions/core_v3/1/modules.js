@@ -46,15 +46,5 @@ diss.modules = {
             return imports;
         },
 
-    },
-
-    // localstorage
-    localStorage: {
-        get(key) {
-
-        },
-        set(key, value) {
-
-        }
     }
 }
