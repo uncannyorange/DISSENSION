@@ -1,33 +1,32 @@
-diss.utils.Webpack();
-diss.discordModules = new Object();
-(function (dm, fup, fm) {
-
-    // misc
-    dm.MessageQueue = fup(['enqueue', 'handleSend', 'handleEdit']);
-    dm.MessageDispatcher = fup(['dispatch', 'wait']);
-    dm.UserCache = fup(['getUser', 'getUsers', 'getCurrentUser']);
-    dm.ChannelCache = fup(['getChannel', 'getDMFromUserId']);
-    dm.SelectedChannelStore = fup(['getChannelId', 'getVoiceChannelId', 'getLastSelectedChannelId']);
-    dm.GuildCache = fup(['getGuild', 'getGuilds']);
+(function (fup, fm) {
+    diss.discordModules = {
+        // misc
+        UserCache: fup(['getUser', 'getUsers', 'getCurrentUser']),
+        ChannelCache: fup(['getChannel', 'getDMFromUserId']),
+        SelectedChannelStore: fup(['getChannelId', 'getVoiceChannelId', 'getLastSelectedChannelId']),
+        GuildCache: fup(['getGuild', 'getGuilds']),
 
 
-    dm.PermissionEvaluator = fup(['can', 'computePermissions', 'canEveryone']);
-    dm.RelationshipStore = fup(['isFriend', 'isBlocked', 'getFriendIds']);
-    dm.PrivateChannelManager = fup(['openPrivateChannel', 'ensurePrivateChannel', 'closePrivateChannel']);
-    dm.Premium = fup(['canUseEmojisEverywhere']);
+        PermissionEvaluator: fup(['can', 'computePermissions', 'canEveryone']),
+        RelationshipStore: fup(['isFriend', 'isBlocked', 'getFriendIds']),
+        PrivateChannelManager: fup(['openPrivateChannel', 'ensurePrivateChannel', 'closePrivateChannel']),
+        Premium: fup(['canUseEmojisEverywhere']),
 
-    // files
-    dm.FileUploader = fup(['upload', 'cancel', 'instantBatchUpload']);
-    dm.CloudUploadPrototype = fm(x => x.prototype?.uploadFileToCloud && x.prototype.upload)?.prototype;
-    dm.CloudUploadHelper = fup(['getUploadPayload']);
+        // files
+        FileUploader: fup(['upload', 'cancel', 'instantBatchUpload']),
+        CloudUploadPrototype: fm(x => x.prototype?.uploadFileToCloud && x.prototype.upload)?.prototype,
+        CloudUploadHelper: fup(['getUploadPayload']),
 
-    // messages
-    dm.DraftStore = fup(["getDraft"]);
-    dm.DraftActions = fup(["changeDraft", "saveDraft"]);
-    dm.MessageActions = fup(["receiveMessage", "sendBotMessage"]);
+        // messages
+        MessageActions: fup(["receiveMessage", "sendBotMessage"]),
+        MessageQueue: fup(['enqueue', 'handleSend', 'handleEdit']),
+        MessageDispatcher: fup(['dispatch', 'wait']),
+        DraftStore: fup(["getDraft"]),
+        DraftActions: fup(["changeDraft", "saveDraft"]),
 
-    // auth
-    dm.Auth = fup(["getId", "getToken"]);
+        // auth
+        Auth: fup(["getId", "getToken"]),
+    }
 
-})(diss.discordModules, diss.utils.cachedWebpack.findModuleByUniqueProperties, diss.utils.cachedWebpack.findModule);
+})(diss.utils.Webpack.findModuleByProps, diss.utils.Webpack.findModule);
 diss.utils.log("Bootstrapped discord modules (diss.discordmodules)");
