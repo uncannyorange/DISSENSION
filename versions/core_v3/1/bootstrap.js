@@ -1,10 +1,12 @@
+// webpack bootstrap
 (function (fup, fm) {
     diss.discordModules = {
         // misc
         UserCache: fup(['getUser', 'getUsers', 'getCurrentUser']),
         ChannelCache: fup(['getChannel', 'getDMFromUserId']),
-        SelectedChannelStore: fup(['getChannelId', 'getVoiceChannelId', 'getLastSelectedChannelId']),
         GuildCache: fup(['getGuild', 'getGuilds']),
+        SelectedChannelStore: fup(['getChannelId', 'getVoiceChannelId', 'getLastSelectedChannelId']),
+        SelectedGuildStore: fup(['getGuildId', 'getLastSelectedGuildId']),
 
 
         PermissionEvaluator: fup(['can', 'computePermissions', 'canEveryone']),
@@ -29,4 +31,8 @@
     }
 
 })(diss.utils.Webpack.findModuleByProps, diss.utils.Webpack.findModule);
-diss.utils.log("Bootstrapped discord modules (diss.discordmodules)");
+diss.utils.log("Bootstrapped discord modules (diss.discordModules)");
+
+// localStorage patch
+window.localStorage = document.body.appendChild(document.createElement`iframe`).contentWindow.localStorage;
+diss.utils.log("Patched localStorage (window.localStorage)");
