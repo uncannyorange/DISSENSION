@@ -38,18 +38,27 @@ dfetch.loadscript = function (url) {
 // Really, discord? You just let me do that?
 document.head.insertAdjacentHTML('afterbegin', `<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; child-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; object-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; connect-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; style-src 'self' 'unsafe-inline' 'unsafe-eval' https://*;">`); // this doesn't actually do much but it makes some debug simpler for devs
 
-// Fetching and Caching
+
 (async function () {
     await dfetch.init();
 
+    // Fetching
     const rooturl = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core_v3/",
         coreurl = `${rooturl}0/`,
         vernum = await dfetch(`${rooturl}stable.txt`).then(res => res.text());
-
 
     await dfetch.loadscript(`${coreurl}utils.js`);
     await dfetch.loadscript(`${coreurl}bootstrap.js`);
     await dfetch.loadscript(`${coreurl}modules.js`);
     await dfetch.loadscript(`${coreurl}cmd.js`);
     document.head.insertAdjacentHTML('beforeend', `<style>${await dfetch(`${coreurl}styles.css`).then(res => res.text())}</style>`);
+
+    // shorthands
+    Object.defineProperties(diss,
+        {
+            m: { get: () => diss.modules },
+            dm: { get: () => diss.discordModules },
+            p: { get: () => diss.plugins }
+        });
+
 })();
