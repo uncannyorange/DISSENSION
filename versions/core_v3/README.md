@@ -1,14 +1,7 @@
 # DISSENSION Core v3
 ## API documentation
-### `CMD` API
-To register a command (or subcommand) you need to pass in:
-- The parent command name (for direct children only)
-- The command name
-- The DAT (or Data Accepted Type) array
-- The handler function
-<br/>
-The DAT is an array of strings which can be:
-- `string` to accept a spaceless string
-- `number` to accept a number
-<br/>
-The handler for your command is passed in a reference to the `cmd` module as the fist argument, like the python `self`. The results of the DATs are then spread as the next arguments.
+### `plugin` API
+You can register a plugin using the `diss.plugins.registerPlugin()` method. It accepts 2 arguments, one being an object with the properties `name`, `displayName`, `description`, `version` and `repoURL` for info, and the other being an object with the `enable` and `disable` methods which run when the plugin runs those actions.
+
+A registered plugin can be enabled and disabled with the `diss.plugins.enable(name)` and `diss.plugins.disable(name)` methods.
+When it is enabled or disabled, the plugin's `enable` and `disable` methods are passed in `diss.plugins` as an argument, which is meant to be destructured to get the methods you need to properly set up the plugin.

@@ -35,10 +35,6 @@ dfetch.loadscript = function (url) {
     return dfetch(url).then(res => res.text()).then(text => (0, eval)(text));
 };
 
-// Really, discord? You just let me do that?
-document.head.insertAdjacentHTML('afterbegin', `<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; child-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; object-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; connect-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; style-src 'self' 'unsafe-inline' 'unsafe-eval' https://*;">`); // this doesn't actually do much but it makes some debug simpler for devs
-
-
 (async function () {
     await dfetch.init();
 
@@ -56,9 +52,12 @@ document.head.insertAdjacentHTML('afterbegin', `<meta http-equiv="Content-Securi
     // shorthands
     Object.defineProperties(diss,
         {
+            u: { get: () => diss.utils},
             m: { get: () => diss.modules },
             dm: { get: () => diss.discordModules },
             p: { get: () => diss.plugins }
         });
 
+    // enable coreutil plugins
+    diss.plugins.enable("cmd");
 })();

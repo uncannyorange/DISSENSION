@@ -1,4 +1,5 @@
 // webpack bootstrap
+diss.utils.cacheWebpack();
 (function (fup, fm) {
     diss.discordModules = {
         // misc
@@ -28,9 +29,8 @@
 
         // auth
         Auth: fup(["getId", "getToken"]),
-    }
-
-})(diss.utils.Webpack.findModuleByProps, diss.utils.Webpack.findModule);
+    };
+})(diss.Webpack.findModuleByProps, diss.Webpack.findModule);
 diss.utils.log("Bootstrapped discord modules (diss.discordModules)");
 
 // localStorage patch

@@ -2,7 +2,7 @@ diss.utils = {
     log: message => console.log(`%c[DISSENSION] %c${message}`, `color:crimson;font-weight:bold`, ""),
     sleep: async ms => new Promise(res => setTimeout(res, ms)),
     cacheWebpack() {
-        if (diss.Webpack) return diss.Webpack;
+        if (this.Webpack) return this.Webpack;
         let webpackExports;
         if (window.webpackChunkdiscord_app != null) {
             const Ids = ['__extra_Id__'];
@@ -15,19 +15,50 @@ diss.utils = {
         }
         else return null;
 
-        const findModule = (filter) => {
-            for (let i in webpackExports.c) {
-                if (webpackExports.c.hasOwnProperty(i)) {
-                    let m = webpackExports.c[i].exports;
-                    if (!m) continue;
-                    if (m.__esModule && m.default) m = m.default;
-                    if (filter(m)) return m;
-                }
-            }
+        const cachedExports = new Set(),
+            moduleCache = new Set(),
+            addModuleToCache = (module) => {
+                if (typeof module !== 'object' && typeof module !== 'function') return;
+                if (module.__esModule && module.default) module = module.default;
+                moduleCache.add(module);
+            },
+            addModulesToCache = (modules) => {
+                for (const rawModule of modules) {
+                    const exports = rawModule.exports;
+                    if (!cachedExports.has(exports)) {
+                        cachedExports.add(exports);
 
-            return null;
-        };
-        const findModuleByProps = propNames => findModule(module => propNames.every(prop => module[prop] !== undefined));
+                        if (typeof exports === 'object') {
+                            const properties = Object.values(Object.getOwnPropertyDescriptors(exports));
+                            const getters = properties.filter(x => x.get);
+                            if (getters.length !== 0 && getters.length === properties.length) {
+                                try {
+                                    // These getters should work without the this parameter
+                                    getters.map(({ get }) => get()).forEach(addModuleToCache);
+                                }
+                                catch {
+                                    addModuleToCache(exports);
+                                }
+                                continue;
+                            }
+                        }
+
+                        addModuleToCache(exports);
+                    }
+                }
+            },
+            findModule = (filter) => {
+                const cache = Object.values(webpackExports.c);
+                if (cache.length !== cachedExports.size)
+                    addModulesToCache(cache);
+
+                for (const module of moduleCache.values()) {
+                    if (filter(module)) return module;
+                };
+
+                return null;
+            },
+            findModuleByProps = (propNames) => findModule(module => propNames.every(prop => module[prop] !== undefined));
 
         return diss.Webpack = { findModule, findModuleByProps };
     },
@@ -64,10 +95,10 @@ diss.utils = {
     },
 
     // current IDs
-    get channelId(){
-        return this.discordModules.SelectedChannelStore.getChannelId();
+    get channelId() {
+        return diss.discordModules.SelectedChannelStore.getChannelId();
     },
-    get guildId(){
+    get guildId() {
         return document.location.pathname.split('/')[2];
     },
 
