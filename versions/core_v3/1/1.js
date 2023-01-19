@@ -40,13 +40,13 @@ dfetch.loadscript = function (url) {
 
     // Fetching
     const rooturl = "https://raw.githubusercontent.com/uncannyorange/DISSENSION/main/versions/core_v3/",
-        coreurl = `${rooturl}0/`,
+        coreurl = `${rooturl}1/`,
         vernum = await dfetch(`${rooturl}stable.txt`).then(res => res.text());
 
     await dfetch.loadscript(`${coreurl}utils.js`);
     await dfetch.loadscript(`${coreurl}bootstrap.js`);
     await dfetch.loadscript(`${coreurl}modules.js`);
-    await dfetch.loadscript(`${coreurl}cmd.js`);
+    await dfetch.loadscript(`${coreurl}plugins.js`);
     document.head.insertAdjacentHTML('beforeend', `<style>${await dfetch(`${coreurl}styles.css`).then(res => res.text())}</style>`);
 
     // shorthands

@@ -73,9 +73,9 @@ diss.modules = {
         // handling
         _cmdmode: 0,
         handle(message) {
-            console.log("this:", this);
-            if (message.content == "$cmd") this._cmdmode ^= 1;
-            if (this._cmdmode) {
+            if (message.content == "$cmd") {
+                this._cmdmode ^= 1;
+            } else if (this._cmdmode) {
                 this.inputStyle('add', 'cmdmode');
                 this.exec(message.content);
                 return null;
@@ -86,7 +86,7 @@ diss.modules = {
         },
         exec(command) {
             const args = this.parse(command);
-            diss.plugins._commands.find(cmd => cmd.name == args[0]).handler({args});
+            diss.plugins._commands.find(cmd => cmd.name == args[0]).handler({ args });
         },
         parse(command) {
             const args = command.match(/("[^"]+"|[^\s"]+)/g);

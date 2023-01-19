@@ -3,27 +3,6 @@
     diss.utils.patch(diss.discordModules.MessageActions, "sendMessage", (...args) => {
         const [messageId, message, x1, x2] = args;
 
-        // // toggle cmdmode
-        // if (message.content == "$cmd") {
-        //     diss.utils._cmdmode ^= 1;
-        //     cmd.setInputStyle(diss.utils._cmdmode ? "cmdmode" : "default");
-        //     diss.utils.log(`command mode set to: ${!!diss.utils._cmdmode}`);
-        // };
-
-        // // getting input
-        // const cb = diss.modules.cmd.getInput._callback
-        // if (cb) cb(message.content);
-
-        // // block if cmdmode, passthrough if not
-        // return (!diss.utils._cmdmode && message.content != "$cmd")
-        //     ? args
-        //     : ( // unreadable black magic
-        //         (message.content == "$cmd")
-        //             ? 0
-        //             : cmd.exec(message.content),
-        //         null
-        //     );
-
         let trace;
         for(const sih of diss.plugins._sendInterceptHandlers){
             trace = sih.handler(message);
