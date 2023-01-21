@@ -79,6 +79,7 @@ diss.plugins = {
     diss.plugins.registerPlugin({ name: "cmd", displayName: "Command Mode", description: "Coreutil that allows other plugins to register commands." },
         {
             enable() {
+                diss.utils.log("[CMD] Enabled cmd module");
                 diss.plugins.registerSendIntercept({ name: "cmd", from: "cmd" }, diss.modules.cmd.handle.bind(diss.modules.cmd));
                 diss.plugins.registerCommand({ name: "help", description: "Shows info about a command", from: "cmd" }, function ({ args }) {
                     const command = diss.plugins._commands.find(cmd => cmd.name == args[1]);
@@ -106,17 +107,19 @@ diss.plugins = {
     diss.plugins.registerPlugin({ name: "css", displayName: "Themes", description: "Coreutil that adds theming and custom css support." },
         {
             enable() {
+                diss.utils.log("[CSS] Enabled css module");
                 diss.plugins.registerCommand({ name: "css", description: "Manage themes and custom css", from: "css" });
             },
             disable() { }
         });
 
     // plugin manager
-    diss.plugins.registerPlugin({ name: "plugins", displayName: "Plugins", description: "Coreutil command to manage plugins" },
+    diss.plugins.registerPlugin({ name: "plugin", displayName: "Plugins", description: "Coreutil command to manage plugins" },
         {
             enable({ registerCommand }) {
-
+                diss.utils.log("[PLUGIN] Enabled plugins command");
             },
             disable() { }
         });
 })();
+diss.utils.log("Set up plugins (diss.plugins)");

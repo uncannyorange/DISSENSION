@@ -103,4 +103,5 @@ diss.modules = {
             return args;
         }
     }
-}
+};
+diss.utils.log("Added custom modules (diss.modules)");
