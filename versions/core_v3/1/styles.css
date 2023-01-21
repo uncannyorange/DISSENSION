@@ -5,7 +5,7 @@
 }
 
 .cmdmode [class*=placeholder-]::after {
-    content: "Enter command";
+    content: "root@dissention:~$";
     visibility: visible;
     font-size: initial;
 }
@@ -13,7 +13,7 @@
 /* cmdmode's dynamic input */
 .cmdinput {
     border: 2px solid #25f4bf;
-    background-color: #3d4946;
+    background-color: #afcccc32;
 }
 
 .cmdinput [class*=placeholder-]::after {
