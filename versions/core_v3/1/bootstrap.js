@@ -27,6 +27,11 @@ diss.utils.cacheWebpack();
         DraftStore: fup(["getDraft"]),
         DraftActions: fup(["changeDraft", "saveDraft"]),
 
+        // emojis
+        Emojis: fup(['getDisambiguatedEmojiContext', 'searchWithoutFetchingLatest']),
+        MessageEmojiParser: fup(['parse', 'parsePreprocessor', 'unparse']),
+        EmojiPermissions: fup(['getEmojiUnavailableReason']),
+
         // auth
         Auth: fup(["getId", "getToken"]),
     };
