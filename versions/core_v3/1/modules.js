@@ -73,7 +73,7 @@ diss.modules = {
         // handling
         _cmdmode: 0,
         handle(message) {
-            if (message.content == "$cmd") this._cmdmode ^= 1; 
+            if (message.content == "$cmd") (this._cmdmode ^= 1, message = null);
             if (this._cmdmode) {
                 this.inputStyle('add', 'cmdmode');
                 this.exec(message.content);
