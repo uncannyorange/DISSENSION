@@ -58,6 +58,5 @@ dfetch.loadscript = function (url) {
             p: { get: () => diss.plugins }
         });
 
-    // enable coreutil plugins
-    diss.plugins.enable("cmd");
+    await dfetch.loadscript(`${coreurl}postinit.js`);
 })();

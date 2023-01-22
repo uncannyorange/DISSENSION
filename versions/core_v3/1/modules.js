@@ -85,7 +85,7 @@ diss.modules = {
         },
         exec(command) {
             const args = this.parse(command);
-            diss.plugins._commands.find(cmd => cmd.name == args[0]).handler({ args });
+            diss.plugins._commands.find(cmd => cmd.name == args[0]).handler({ args, raw:command });
         },
         parse(command) {
             const args = command.match(/("[^"]+"|[^\s"]+)/g);

@@ -4,7 +4,7 @@
         const [messageId, message, x1, x2] = args;
 
         let trace;
-        for(const sih of diss.plugins._sendInterceptHandlers){
+        for (const sih of diss.plugins._sendInterceptHandlers) {
             trace = sih.handler(message);
             if (trace === null) return null;
         };
@@ -81,8 +81,13 @@ diss.plugins = {
             enable() {
                 diss.utils.log("[CMD] Enabled cmd module");
                 diss.plugins.registerSendIntercept({ name: "cmd", from: "cmd" }, diss.modules.cmd.handle.bind(diss.modules.cmd));
-                diss.plugins.registerCommand({ name: "help", description: "Shows info about a command", from: "cmd" }, function ({ args }) {
+                diss.plugins.registerCommand({ name: "help", description: "Shows info about a command", from: "cmd" }, function cmdhelp({ args }) {
+                    if (args[1] == "all") {
+                        return diss.plugins._commands.forEach(c => cmdhelp({args:[0, c.name]}));
+                    };
+
                     const command = diss.plugins._commands.find(cmd => cmd.name == args[1]);
+                    if (!command) return diss.utils.imsg(`\`[help] command "${args[1]}" not found.\``);
                     diss.utils.imsg("", [{
                         "type": "rich",
                         "title": `Command help`,
@@ -103,21 +108,22 @@ diss.plugins = {
             disable() { }
         });
 
+    // plugin manager
+    diss.plugins.registerPlugin({ name: "plugins", displayName: "Plugins", description: "Coreutil command to manage plugins" },
+        {
+            enable(p) {
+                diss.utils.log("[PLUGIN] Enabled plugins command");
+                p.registerCommand({ name: "plugin", description: "Add, remove, enable, and disable plugins.", from: "plugins" }, );
+            },
+            disable() { }
+        });
+
     // themes/custom css
     diss.plugins.registerPlugin({ name: "css", displayName: "Themes", description: "Coreutil that adds theming and custom css support." },
         {
             enable() {
                 diss.utils.log("[CSS] Enabled css module");
                 diss.plugins.registerCommand({ name: "css", description: "Manage themes and custom css", from: "css" });
-            },
-            disable() { }
-        });
-
-    // plugin manager
-    diss.plugins.registerPlugin({ name: "plugin", displayName: "Plugins", description: "Coreutil command to manage plugins" },
-        {
-            enable({ registerCommand }) {
-                diss.utils.log("[PLUGIN] Enabled plugins command");
             },
             disable() { }
         });
