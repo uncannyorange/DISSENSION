@@ -2,7 +2,7 @@
 ## Getting Started
 (this documentation is for core 3.1+)
 ### Commands
-Most of Dissention relies on the *command mode*. This mode is toggleable by typing `$cmd` in chat. You can tell if you're in command mode when the imput bar becomes cordered in orange.<br><br>
+Most of Dissention relies on the *command mode*. This mode is toggleable by typing `$cmd` in chat. You can tell if you're in command mode when the imput bar becomes bordered in orange.<br><br>
 
 From here, you can run commands. The most basic command is `help` and its syntax is `help <command|all>`, where using the `all` parameter acts as running the `help` command for every command.<br><br>
 
