@@ -3,9 +3,9 @@ let getEmojiUnavailableReasonHook,
     parseHook;
 diss.p.registerPlugin({
     name: "freeemojis",
-    displayName: "this.storeFreeEmojis",
+    displayName: "DiscordFreeEmojis",
     description: "Link emojis if you don't have nitro! Type them out or use the emoji picker!",
-    repoURL: "https://github.com/An00nymushun/this.storeFreeEmojis"
+    repoURL: "https://github.com/An00nymushun/DiscordFreeEmojis"
 },
 {
     enable() {
