@@ -26,6 +26,10 @@ diss.plugins = {
      */
     registerPlugin({ name, displayName, description, version, repoURL }, pluginobj) {
         this._registry[name] = { displayName, description, version, repoURL, plugin: pluginobj };
+        diss.m.storage.store("pluginRegistryCache", this._registry);
+    },
+    removePlugin(name){
+
     },
     /**
      * Runs a registered plugin's `enable` function.
@@ -68,22 +72,75 @@ diss.plugins = {
     //
     // Command
     //
-    cli: {
+    _cli: {
+        handle({ args }) {
+            const [_0, _1, ...rest] = args;
+            switch (args[1]) {
+                case "list":
+                    this.listPlugins();
+                    break;
 
+                case "enable":
+                    this.enablePlugins(rest);
+                    break;
+
+                case "disable":
+                    this.disablePlugins(rest);
+                    break;
+
+                case "add":
+                    this.addPlugin(rest);
+                    break;
+
+                case "remove":
+                    this.removePlugin(rest);
+                    break;
+
+                default:
+                    break;
+            }
+        },
+        listPlugins(){
+
+        },
+        enablePlugins(plugins){
+            plugins.forEach(plugin => {
+                if (!diss.p._registry[plugin]) return diss.utils.imsg(`\`[plugin] plugin "${plugin}" not found.\``);
+                diss.p.enable(plugin);
+            });
+        },
+        disablePlugins(plugins){
+            plugins.forEach(plugin => {
+                if (!diss.p._registry[plugin]) return diss.utils.imsg(`\`[plugin] plugin "${plugin}" not found.\``);
+                diss.p.disable(plugin);
+            });
+        }, 
+        addPlugin(plugins){
+
+        },
+        removePlugin(plugins){
+
+        }
     }
 };
 
 // core plugins
 (function () {
+    // defult manpage
+    const man = "https://github.com/uncannyorange/DISSENSION/blob/main/versions/core_v3/README.md"
+
+    // load data
+    diss.modules.store.load("pluginRegistryCache");
+
     // command mode
     diss.plugins.registerPlugin({ name: "cmd", displayName: "Command Mode", description: "Coreutil that allows other plugins to register commands." },
         {
             enable() {
                 diss.utils.log("[CMD] Enabled cmd module");
                 diss.plugins.registerSendIntercept({ name: "cmd", from: "cmd" }, diss.modules.cmd.handle.bind(diss.modules.cmd));
-                diss.plugins.registerCommand({ name: "help", description: "Shows info about a command", from: "cmd" }, function cmdhelp({ args }) {
+                diss.plugins.registerCommand({ name: "help", description: "Shows info about a command", from: "cmd", man }, function cmdhelp({ args }) {
                     if (args[1] == "all") {
-                        return diss.plugins._commands.forEach(c => cmdhelp({args:[0, c.name]}));
+                        return diss.plugins._commands.forEach(c => cmdhelp({ args: [0, c.name] }));
                     };
 
                     const command = diss.plugins._commands.find(cmd => cmd.name == args[1]);
@@ -113,7 +170,7 @@ diss.plugins = {
         {
             enable(p) {
                 diss.utils.log("[PLUGIN] Enabled plugins command");
-                p.registerCommand({ name: "plugin", description: "Add, remove, enable, and disable plugins.", from: "plugins" }, );
+                p.registerCommand({ name: "plugin", description: "Add, remove, enable, and disable plugins.", from: "plugins", man }, diss.plugins._cli.handle.bind(diss.plugins._cli));
             },
             disable() { }
         });
@@ -123,7 +180,7 @@ diss.plugins = {
         {
             enable() {
                 diss.utils.log("[CSS] Enabled css module");
-                diss.plugins.registerCommand({ name: "css", description: "Manage themes and custom css", from: "css" });
+                diss.plugins.registerCommand({ name: "css", description: "Manage themes and custom css", from: "css", man });
             },
             disable() { }
         });
