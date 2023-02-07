@@ -130,7 +130,7 @@ diss.plugins = {
     const man = "https://github.com/uncannyorange/DISSENSION/blob/main/versions/core_v3/README.md"
 
     // load data
-    diss.modules.store.load("pluginRegistryCache");
+    //diss.modules.store.load("pluginRegistryCache");
 
     // command mode
     diss.plugins.registerPlugin({ name: "cmd", displayName: "Command Mode", description: "Coreutil that allows other plugins to register commands." },
