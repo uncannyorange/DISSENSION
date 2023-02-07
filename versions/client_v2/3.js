@@ -42,6 +42,9 @@
         // getting core
         const sv = (await dfetch(`${rawurl}versions/core_v3/stable.txt`, 'DISS23-STABLEVER').then(res => res.text())).split(":")[0];
         (0, eval)(await dfetch(`${rawurl}versions/core_v3/${sv}/${sv}.js`, 'DISS23-CORESCRIPT').then(res => res.text()));
+        
+        // closing client dfetch window
+        dfetch.win.close();
     };
 
     // check for location
