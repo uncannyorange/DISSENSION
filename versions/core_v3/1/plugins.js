@@ -26,7 +26,7 @@ diss.plugins = {
      */
     registerPlugin({ name, displayName, description, version, repoURL }, pluginobj) {
         this._registry[name] = { displayName, description, version, repoURL, plugin: pluginobj };
-        diss.m.storage.store("pluginRegistryCache", this._registry);
+        //diss.m.storage.store("pluginRegistryCache", this._registry);
     },
     removePlugin(name){
 
